@@ -14,11 +14,24 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
+const signupData = {
+        name: '',
+        username: '',
+        password: ''
+    }
+
 const Login = () => {
     const [accout, toggleAccount] = useState('login');
+    const [signup, setSignup] = useState(signupData);
+
     const toggleSignup = () => {
-        toggleAccount(accout === 'login' ? 'signup' : 'login');
+      toggleAccount(accout === 'login' ? 'signup' : 'login');
     }
+    const onInputChange = (e) => {
+      setSignup({...signup, [e.target.name]: e.target.value});
+      
+    }
+
   return (
      accout === 'login' ?
     <Card className="w-full max-w-sm p-4">
@@ -35,7 +48,8 @@ const Login = () => {
               id="text"
               type="text"
               placeholder="Username"
-              required
+              required 
+              
             />
           </div>
 
@@ -73,7 +87,8 @@ const Login = () => {
               id="text"
               type="text"
               placeholder="Name"
-              required
+              required name="name"
+              onChange={(e)=>onInputChange(e)}
             />
           </div>
           <div className="grid gap-2">
@@ -82,16 +97,16 @@ const Login = () => {
               id="text"
               type="text"
               placeholder="Username"
-              required
+              required name="username"
+              onChange={(e)=>onInputChange(e)}
             />
           </div>
 
           <div className="grid gap-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
-              
             </div>
-            <Input id="password" type="password" required />
+            <Input name="password" id="password" type="password" required onChange={(e)=>onInputChange(e)} />
           </div>
         </form>
       </CardContent>
